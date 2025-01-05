@@ -1,0 +1,40 @@
+{% extends "admin/base_admin.html" %}
+
+    {% block title %}Camera Configuration List - Admin{% endblock %}
+
+    {% block content %}
+    <div class="container">
+        <h1>Saved Camera Configurations</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Camera Source</th>
+                    <th>Threshold</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for config in configs %}
+                <tr>
+                    <td>{{ config[1] }}</td>
+                    <td>{{ config[2] }}</td>
+                    <td>{{ config[3] }}</td>
+                    <td>
+                        <a href="{% url 'admin.camera_config_update' config.id %}" style="color: #FFD700;">Edit</a> |
+                        <a href="{% url 'admin.camera_config_delete' config.id %}" style="color: #FFD700;">Delete</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4">No camera configurations found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{% url 'admin.camera_config' %}" class="create-new-btn">Create New Configuration</a>
+        <a href="{% url 'core.index' %}" class="back-home-btn">Back to Home</a>
+    </div>
+    {% endblock %}

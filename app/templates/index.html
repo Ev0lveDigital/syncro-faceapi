@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+    {% block title %}Home - Facial Recognition Attendance System{% endblock %}
+
+    {% block head %}
+    <script defer src="{{ url_for('static', filename='js/face-api.min.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='js/script.js') }}"></script>
+    {% endblock %}
+
+    {% block content %}
+    <h2>Welcome to the Attendance System</h2>
+
+    <div class="container">
+        <div class="video-container">
+            <img id="video" src="{{ url_for('core.video_feed') }}" width="600" height="450" autoplay>
+        </div>
+
+        <h3>Recent Attendance (Today)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Employee</th>
+                    <th>Employee ID</th>
+                    <th>Date</th>
+                    <th>Check-in Time</th>
+                    <th>Check-out Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in recent_attendance %}
+                <tr>
+                    <td>{{ record[0] }}</td>
+                    <td>{{ record[1] }}</td>
+                    <td>{{ record[2] }}</td>
+                    <td>{{ record[3] }}</td>
+                    <td>{{ record[4] }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5">No attendance records found for today.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endblock %}

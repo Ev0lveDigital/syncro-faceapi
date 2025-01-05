@@ -1,0 +1,25 @@
+{% extends "admin/base_admin.html" %}
+
+    {% block title %}Camera Configuration - Admin{% endblock %}
+
+    {% block content %}
+    <div class="form-container">
+        <h1>{{ config.name|default:"Create Camera Configuration" }}</h1>
+
+        <form method="POST">
+            <label for="name">Camera Name:</label>
+            <input type="text" id="name" name="name" value="{{ config.name|default:'' }}" placeholder="Enter camera name" required>
+
+            <label for="camera_source">Camera Source:</label>
+            <input type="text" id="camera_source" name="camera_source" value="{{ config.camera_source|default:'' }}" placeholder="Enter 0 for default or IP camera URL" required>
+
+            <label for="threshold">Threshold:</label>
+            <input type="number" step="0.01" id="threshold" name="threshold" value="{{ config.threshold|default:0.6 }}" placeholder="Enter threshold value (0.0 to 1.0)" required>
+
+            <button type="submit">Save</button>
+        </form>
+
+        <button class="nav-button" onclick="location.href='{% url 'admin.camera_config_list' %}'">Back to List</button>
+        <button class="nav-button" onclick="location.href='{% url 'core.index' %}'">Back to Home</button>
+    </div>
+    {% endblock %}

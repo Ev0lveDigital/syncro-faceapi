@@ -1,0 +1,51 @@
+{% extends "admin/base_admin.html" %}
+
+    {% block title %}Register Employee - Admin{% endblock %}
+
+    {% block head %}
+    <script defer src="{{ url_for('static', filename='js/face-api.min.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='js/script.js') }}"></script>
+    {% endblock %}
+
+    {% block content %}
+    <div class="container">
+        <div class="card shadow">
+            <div class="card-body text-center">
+                <h2 class="card-title">Employee Registration</h2>
+
+                <div class="capture-section">
+                    <h5 class="mb-3">Capture Photo</h5>
+                    <video id="video" autoplay></video>
+                </div>
+
+                <form id="registrationForm" method="post" enctype="multipart/form-data">
+                    <div class="upload-section">
+                        <h5 class="mb-3">Profile Picture (Optional)</h5>
+                        <label for="profile_picture">Upload a profile picture:</label>
+                        <input type="file" class="form-control profile-upload" id="profile_picture" name="profile_picture" accept="image/*">
+                        <img id="profilePreview" class="profile-preview" alt="Profile Picture Preview">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="employee_id">Employee ID:</label>
+                        <input type="text" class="form-control" id="employee_id" name="employee_id" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+
+                    <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
+                    <input type="hidden" id="image_data" name="image_data">
+                    <img id="imagePreview" class="image-preview" src="" alt="Captured Image Preview" />
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-success" id="submitBtn">Submit Registration</button>
+                    </div>
+                    <div class="back-button" onclick="location.href='{% url 'admin.register_employee' %}'">
+                        <i class="fas fa-home"></i> Back to Home
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+    {% block title %}Error - Facial Recognition Attendance System{% endblock %}
+
+    {% block content %}
+    <h2>An Error Occurred</h2>
+    <p>{{ error_message }}</p>
+    <p><a href="{{ url_for('core.index') }}">Go back to the homepage</a></p>
+    {% endblock %}
